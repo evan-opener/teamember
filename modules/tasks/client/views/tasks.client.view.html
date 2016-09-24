@@ -1,0 +1,26 @@
+<section>
+  <div class="container">
+    <div class="page-header">
+      <h1>Tasks</h1>
+      <span class="badge" ng-bind="tasks.length"></span>
+    </div>
+    <table class="table table-hovered">
+      <thead>
+        <tr>
+          <th width="40%">Subject</th>
+          <th>Assigned by</th>
+          <th>Start date</th>
+          <th>Due date</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody ng-repeat="task in tasks">
+        <tr ng-bind="task.title"></tr>
+        <tr ng-bind="task.author"></tr>
+        <tr ng-bind="task.startDate"></tr>
+        <tr ng-bind="task.dueDate"></tr>
+        <tr></tr>
+      </tbody>
+    </table>
+  </div>
+</section>

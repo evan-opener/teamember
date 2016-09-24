@@ -1,0 +1,133 @@
+.content {
+  margin-top: 50px;
+}
+.undecorated-link:hover {
+  text-decoration: none;
+}
+[ng\:cloak],
+[ng-cloak],
+[x-ng-cloak],
+.ng-cloak,
+.x-ng-cloak {
+  display: none !important;
+}
+.header-profile-image {
+  opacity: 0.8;
+  height: 28px;
+  width: 28px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+.open .header-profile-image,
+a:hover .header-profile-image {
+  opacity: 1;
+}
+.user-header-dropdown-toggle {
+  padding-top: 11px !important;
+  padding-bottom: 11px !important;
+}
+.error-text {
+  display: none;
+}
+.has-error .help-block.error-text {
+  display: block;
+}
+.has-error .help-inline.error-text {
+  display: inline;
+}
+.banner {
+  position: absolute;
+  width: 100%;
+  height: auto;
+  top: 0;
+  vertical-align: bottom
+}
+
+.ban {
+  margin-left: -15px;
+  margin-right: -15px;
+  background-color: #707b89;
+}
+
+.mask {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  padding-right: 0;
+  text-align: left;
+  color: aliceblue;
+  background-color: #454444;
+  opacity: 0.8;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  -webkit-align-items: center;
+}
+
+.ban-center {
+  position: absolute;
+  width: 100%;
+  vertical-align: middle;
+  padding: 10px;
+  opacity: 1;
+  -webkit-flex: 1; /* Safari 6.1+ */
+  flex: 1;
+}
+
+.icon-big {
+  height: 64;
+  width: 64
+}
+
+#banner-title {
+  font-size: 24px;
+}
+
+#banner-text {
+  font-size: 18px;
+  padding-bottom: 10px;
+}
+
+#tryitnow {
+  background-color: #454444;
+  border: 1px solid white;
+  border-radius: 6px;
+  font-size: 16px;
+  color: white
+}
+
+#order {
+  font-style: oblique;
+  color: #07b0da;
+}
+
+#text-title {
+  color: #07b0da;
+  text-align: center;
+  font-size: 2.4em;
+}
+
+.text-center {
+  text-align: center
+}
+
+.foot {
+  /* position: absolute; */
+  /* width: 100%; */
+  margin-top: 150px;
+  display: -webkit-flex;
+  align-items: center;
+  bottom: 0;
+  background-color: #333333;
+  color: white;
+}
+
+.navbar-inverse {
+  background-color: #333333;
+}
+
+.foot-text {
+  margin: 0 auto;
+
+}

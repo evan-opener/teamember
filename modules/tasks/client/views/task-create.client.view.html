@@ -1,0 +1,38 @@
+<section>
+  <div class="container">
+    <div class="page-header">
+      <h3>Create a Task</h4>
+    </div>
+    <form class="form-group">
+      <label class="formlabel" for="Subject">Subject</label>
+      <input width="100%" type="text" class="form-control" placeholder="Enter Subject" ng-bind="newTask.title" required />
+      <div class="row">
+        <div class="col-md-3">
+          <label class="formlabel" for="Assign to">Assign to</label>
+          <input class="form-control" type="text" ng-model="newTask.asignTo" required />
+        </div>
+        <div class="col-md-3">
+          <label class="formlabel" for="rating">Rating</label>
+          <select class="form-control" id="rating" ng-model="newTask.rating">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+          </select>
+        </div>
+        <div class="col-md-3">
+          <label class="formlabel">Start Date</label>
+          <input class="form-control" type="date" ng-model="startDate" required />
+        </div>
+        <div class="col-md-3">
+          <label class="formlabel">Due Date</label>
+          <input class="form-control" type="date" ng-model="dueDate" required />
+        </div>
+      </div>
+      <label class="formlabel">Content</label>
+      <textarea class="form-control" type="text" rows="5" ng-model="newTask.content"></textarea>
+      <div class="padding-top">
+        <input class="btn center-block" type="submit" value="Confirm" />
+      </div>
+    </form>
+  </div>
+</section>
