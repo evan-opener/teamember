@@ -19,12 +19,12 @@
     
     Menus.addSubMenuItem('topbar', 'tasks', {
       title: 'Tasks list',
-      state: 'task-list'
+      state: 'tasks.list'
     });
     
     Menus.addSubMenuItem('topbar', 'tasks', {
       title: 'Create a New Task',
-      state: 'task-create'
+      state: 'tasks.create'
     });
   }
 })();

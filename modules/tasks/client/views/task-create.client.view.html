@@ -3,7 +3,7 @@
     <div class="page-header">
       <h3>Create a Task</h4>
     </div>
-    <form class="form-group">
+    <form class="form-group" name="taskForm" ng-submit="taskCreate(taskForm.$valid)" novalidate>
       <label class="formlabel" for="Subject">Subject</label>
       <input width="100%" type="text" class="form-control" placeholder="Enter Subject" ng-bind="newTask.title" required />
       <div class="row">
@@ -21,11 +21,11 @@
         </div>
         <div class="col-md-3">
           <label class="formlabel">Start Date</label>
-          <input class="form-control" type="date" ng-model="startDate" required />
+          <input class="form-control" type="date" ng-model="newTask.startDate" />
         </div>
         <div class="col-md-3">
           <label class="formlabel">Due Date</label>
-          <input class="form-control" type="date" ng-model="dueDate" required />
+          <input class="form-control" type="date" ng-model="newTask.dueDate" />
         </div>
       </div>
       <label class="formlabel">Content</label>

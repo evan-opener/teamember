@@ -13,7 +13,7 @@ var path = require('path'),
  * Create a Task
  */
 exports.create = function (req, res) {
-  var task = new Task(req, res);
+  var task = new Task(req.body);
   task.author = req.user;
   
   task.save(function (err) {
