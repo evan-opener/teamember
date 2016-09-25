@@ -5,7 +5,7 @@
  */
 var path = require('path'),
   mongoose = require('mongoose'),
-    Task = mongoose.model('Tasks'),
+  Task = mongoose.model('Tasks'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   _ = require('lodash');
 
@@ -92,7 +92,7 @@ exports.taskByID = function (req, res, next, id) {
         message: 'No task with that identifier has been found'
       });
     }
-    req.tasks  = tasks;
+    req.tasks = tasks;
     next();
   });
 };
