@@ -1,25 +1,26 @@
 <section ng-init="find()">
   <div class="container">
     <div class="page-header">
-      <h1>Tasks</h1>
-      <span class="badge" ng-bind="tasks.length"></span>
+      <h1>Tasks<span class="badge" ng-bind="tasks.length"></span></h1>
     </div>
     <table class="table table-hovered">
       <thead>
         <tr>
-          <th width="40%">Subject</th>
-          <th>Assigned by</th>
+          <th>Subject</th>
+          <th>Assigned To</th>
           <th>Start date</th>
           <th>Due date</th>
-          <th>Status</th>
+          <th>Task content</th>
         </tr>
       </thead>
-      <tbody ng-repeat="task in tasks">
-        <tr ng-bind="task.title"></tr>
-        <tr ng-bind="task.author"></tr>
-        <tr ng-bind="task.startDate"></tr>
-        <tr ng-bind="task.dueDate"></tr>
-        <tr></tr>
+      <tbody>
+        <tr  ng-repeat="task in tasks">
+          <td ng-bind="task.title"></td>
+          <td ng-bind="task.assignTo"></td>
+          <td ng-bind="task.startDate"></td>
+          <td ng-bind="task.dueDate"></td>
+          <td ng-bind="task.content"></td>
+        </tr>
       </tbody>
     </table>
   </div>

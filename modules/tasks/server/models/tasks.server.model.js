@@ -26,25 +26,23 @@ var TasksSchema = new Schema({
   },
   title: {
     type: String,
-    default: '',
-    trim: true,
     require: 'Task name'
   },
   content: {
     type: String,
   },
-  asignTo: {
-    type: Schema.ObjectId,
-    ref: 'User'
+  assignTo: {
+    type: String,
+    /*ref: 'User'*/
   },
   dueDate: {
     type: Date,
     require: 'Please give a due date.'
-  },
-  finish: {
-    type: Date,
-    default: ''
   }
+  /*finish: {
+    type: Date,
+    default: '' 
+  }*/
 });
 
 mongoose.model('Tasks', TasksSchema);

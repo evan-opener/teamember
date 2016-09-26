@@ -4,16 +4,16 @@
       <h3>Create a Task</h4>
     </div>
     <form class="form-group" name="taskForm" ng-submit="taskCreate(taskForm.$valid)" novalidate>
-      <label class="formlabel" for="Subject">Subject</label>
-      <input width="100%" type="text" class="form-control" placeholder="Enter Subject" ng-bind="newTask.title" required />
+      <label class="formlabel">Subject</label>
+      <input width="100%" type="text" class="form-control" placeholder="Enter Subject" ng-model="newTask.title" required />
       <div class="row">
         <div class="col-md-3">
-          <label class="formlabel" for="Assign to">Assign to</label>
-          <input class="form-control" type="text" ng-model="newTask.asignTo" required />
+          <label class="formlabel">Assign to</label>
+          <input class="form-control" type="text" ng-model="newTask.assignTo" required />
         </div>
         <div class="col-md-3">
           <label class="formlabel" for="rating">Rating</label>
-          <select class="form-control" id="rating" ng-model="newTask.rating">
+          <select class="form-control" id="rating" ng-model="newTask.rating" />
             <option>1</option>
             <option>2</option>
             <option>3</option>

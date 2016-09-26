@@ -3,11 +3,11 @@
 
   angular
     .module('tasks')
-    .factory('tasksService', tasksService);
+    .factory('Tasks', Tasks);
 
-  tasksService.$inject = ['$resource'];
+  Tasks.$inject = ['$resource'];
 
-  function tasksService($resource) {
+  function Tasks($resource) {
     // Tasks service logic
     // ...
 
