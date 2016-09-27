@@ -40,6 +40,7 @@
       }, function (errorResponse){
         
       });
+      console.log(task);
     };
     
     $scope.delete = function(task){
@@ -48,7 +49,7 @@
         
         for(var i in $scope.tasks){
           if($scope.tasks[i] === task){
-            $scope.tasks.splice(i,1);
+            $scope.tasks.splice(i, 1);
           }
         }
       }

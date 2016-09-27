@@ -6,3 +6,9 @@
 .padding-top{
   padding-top: 30px
 }
+
+.task {
+  font-family: Helvetica;
+  vertical-align: middle;
+  font-size: 1.3em;
+}

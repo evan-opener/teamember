@@ -7,7 +7,7 @@ module.exports = function(app) {
     .get(tasks.list)
     .post(tasks.create);
   
-  app.route('/api/tasks/:postId')
+  app.route('/api/tasks/:taskId')
     .delete(tasks.delete);
   
   app.param('taskId', tasks.taskByID);

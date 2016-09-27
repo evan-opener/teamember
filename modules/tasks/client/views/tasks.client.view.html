@@ -3,7 +3,7 @@
     <div class="page-header">
       <h1>Tasks<span class="badge" ng-bind="tasks.length"></span></h1>
     </div>
-    <table class="table table-hovered">
+    <table class="table table-hover">
       <thead>
         <tr>
           <th>Subject</th>
@@ -11,15 +11,17 @@
           <th>Start date</th>
           <th>Due date</th>
           <th>Task content</th>
+          <th>Remove</th>
         </tr>
       </thead>
       <tbody>
-        <tr  ng-repeat="task in tasks">
+        <tr class="task" ng-repeat="task in tasks">
           <td ng-bind="task.title"></td>
           <td ng-bind="task.assignTo"></td>
-          <td ng-bind="task.startDate"></td>
-          <td ng-bind="task.dueDate"></td>
+          <td ng-bind="task.startDate | date:'yyyy-MM-dd'"></td>
+          <td ng-bind="task.dueDate | date:'yyyy-MM-dd'"></td>
           <td ng-bind="task.content"></td>
+          <td><a class="btn btn-danger" ng-init="task._id" ng-click="delete(task)">X</a></td>
         </tr>
       </tbody>
     </table>

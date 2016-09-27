@@ -47,7 +47,9 @@ exports.update = function (req, res) {
 exports.delete = function (req, res) {
   var task = req.task;
   
-  task.remove(function (err){
+  Task.remove({
+    _id: req.params.taskId
+  }, function (err){
     if(err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
