@@ -26,18 +26,20 @@ var TasksSchema = new Schema({
   },
   title: {
     type: String,
-    require: 'Task name'
+    require: 'Task subject cannot be blank!'
   },
   content: {
     type: String,
+    require: 'Task content cannot be blank!'
   },
   assignTo: {
     type: String,
+    require: 'The task need a executor!'
     /*ref: 'User'*/
   },
   dueDate: {
     type: Date,
-    require: 'Please give a due date.'
+    require: 'Please give a due date!'
   }
   /*finish: {
     type: Date,

@@ -16,7 +16,10 @@
     };
 
     $scope.taskCreate = function(isValid) {
+      //$scope.error = null;
+      
       if(!isValid){
+        $scope.$broadcast('show-errors-check-validity', 'taskForm');
         return false;
       }
       
@@ -38,7 +41,7 @@
         $scope.newTask.content = '';
         $location.path('/tasks');
       }, function (errorResponse){
-        
+        $scope.error = errorResponse.data.message;
       });
       console.log(task);
     };
