@@ -7,8 +7,20 @@
   padding-top: 30px
 }
 
-.task {
+.table tbody tr td {
+  vertical-align: middle;
+}
+
+.table-head {
   font-family: Helvetica;
   vertical-align: middle;
   font-size: 1.3em;
+  background-color: #ecebeb
 }
+
+.task {
+  font-family: Helvetica;
+  font-size: 1.2em;
+  padding-top: 15px;
+}
+
