@@ -20,7 +20,7 @@
           <td ng-bind="task.assignTo"></td>
           <td ng-bind="task.startDate | date:'yyyy-MM-dd'"></td>
           <td ng-bind="task.dueDate | date:'yyyy-MM-dd'"></td>
-          <td ng-bind="task.content"></td>
+          <td width="40%" ng-bind="task.content | limitTo:50"></td>
           <td><a class="btn btn-danger" ng-init="task._id" ng-click="delete(task)">X</a></td>
         </tr>
       </tbody>
