@@ -5,27 +5,31 @@
  */
 var mongoose = require('mongoose'),
   Schema = mongoose.Schema;
-var ObjectId = Schema.ObjectId;
 
 /**
  * Tasks Schema
  */
-var TasksSchema = new Schema({
+var TaskSchema = new Schema({
   // Tasks model fields
   // ...
   ID: {
     type: String,
   },
-  author: {
+  user: {
     type: Schema.ObjectId,
     ref: 'User'
   },
-  startDate: {
+  createDate: {
     type: Date,
     default: Date.now
   },
+  startDate: {
+    type: Date,
+    require: 'Please give a start date!'
+  },
   title: {
     type: String,
+    trim: true,
     require: 'Task subject cannot be blank!'
   },
   content: {
@@ -47,4 +51,5 @@ var TasksSchema = new Schema({
   }*/
 });
 
-mongoose.model('Tasks', TasksSchema);
+
+mongoose.model('Task', TaskSchema);

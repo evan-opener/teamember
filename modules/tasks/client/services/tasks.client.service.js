@@ -1,24 +1,20 @@
+//Tasks service used to communicate Tasks REST endpoints
 (function () {
   'use strict';
 
   angular
     .module('tasks')
-    .factory('Tasks', Tasks);
+    .factory('TasksService', TasksService);
 
-  Tasks.$inject = ['$resource'];
+  TasksService.$inject = ['$resource'];
 
-  function Tasks($resource) {
-    // Tasks service logic
-    // ...
-
-    // Public API
-    return $resource('/api/tasks/:taskId', {
+  function TasksService($resource) {
+    return $resource('api/tasks/:taskId', {
       taskId: '@_id'
     }, {
       update: {
         method: 'PUT'
       }
     });
-  } 
+  }
 })();
-

@@ -1,7 +1,6 @@
-(function() {
+(function () {
   'use strict';
 
-  // Tasks module config
   angular
     .module('tasks')
     .run(menuConfig);
@@ -9,22 +8,25 @@
   menuConfig.$inject = ['Menus'];
 
   function menuConfig(Menus) {
-    // Config logic
+    // Set top bar menu items
     Menus.addMenuItem('topbar', {
       title: 'Tasks',
       state: 'tasks',
       type: 'dropdown',
-      roles: ['user', 'admin']
+      roles: ['*']
     });
-    
+
+    // Add the dropdown list item
     Menus.addSubMenuItem('topbar', 'tasks', {
-      title: 'Tasks list',
+      title: 'List Tasks',
       state: 'tasks.list'
     });
-    
+
+    // Add the dropdown create item
     Menus.addSubMenuItem('topbar', 'tasks', {
-      title: 'Create a New Task',
-      state: 'tasks.create'
+      title: 'Create Task',
+      state: 'tasks.create',
+      roles: ['user']
     });
   }
 })();

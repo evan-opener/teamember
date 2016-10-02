@@ -1,66 +1,53 @@
-(function() {
+(function () {
   'use strict';
 
+  // Tasks controller
   angular
     .module('tasks')
     .controller('TasksController', TasksController);
 
-  TasksController.$inject = ['$scope', 'Tasks', '$location'];
+  TasksController.$inject = ['$scope', '$state', 'Authentication', 'taskResolve'];
 
-  function TasksController($scope, Tasks, $location) {
+  function TasksController ($scope, $state, Authentication, task) {
     var vm = this;
 
-    // Tasks controller logic
-    $scope.find = function () {
-      $scope.tasks = Tasks.query();
-    };
+    vm.authentication = Authentication;
+    vm.task = task;
+    vm.error = null;
+    vm.form = {};
+    vm.remove = remove;
+    vm.save = save;
 
-    $scope.taskCreate = function(isValid) {
-      //$scope.error = null;
-      
-      if(!isValid){
-        $scope.$broadcast('show-errors-check-validity', 'taskForm');
+    // Remove existing Task
+    function remove() {
+      if (confirm('Are you sure you want to delete?')) {
+        vm.task.$remove($state.go('tasks.list'));
+      }
+    }
+
+    // Save Task
+    function save(isValid) {
+      if (!isValid) {
+        $scope.$broadcast('show-errors-check-validity', 'vm.form.taskForm');
         return false;
       }
-      
-      var task = new Tasks({
-        title: $scope.newTask.title,
-        assignTo: $scope.newTask.assignTo,
-        startDate: $scope.newTask.startDate,
-        dueDate: $scope.newTask.dueDate,
-        content: $scope.newTask.content
-        
-      });
-      
-      task.$save(function (response){
-        
-        $scope.newTask.title = '';
-        $scope.newTask.assignTo = '';
-        $scope.newTask.startDate = '';
-        $scope.newTask.dueDate = '';
-        $scope.newTask.content = '';
-        $location.path('/tasks');
-      }, function (errorResponse){
-        $scope.error = errorResponse.data.message;
-      });
-      console.log(task);
-    };
-    
-    $scope.delete = function(task){
-      if(task){
-        task.$remove();
-        
-        for(var i in $scope.tasks){
-          if($scope.tasks[i] === task){
-            $scope.tasks.splice(i, 1);
-          }
-        }
-      }
-    };
-    
-    init();
 
-    function init() {
+      // TODO: move create/update logic to service
+      if (vm.task._id) {
+        vm.task.$update(successCallback, errorCallback);
+      } else {
+        vm.task.$save(successCallback, errorCallback);
+      }
+
+      function successCallback(res) {
+        $state.go('tasks.view', {
+          taskId: res._id
+        });
+      }
+
+      function errorCallback(res) {
+        vm.error = res.data.message;
+      }
     }
   }
 })();

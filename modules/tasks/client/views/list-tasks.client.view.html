@@ -1,0 +1,35 @@
+<section>
+  <div class="page-header">
+    <h1>Tasks</h1>
+  </div>
+  <table class="table table-hover">
+      <thead class="table-head">
+        <tr>
+          <th>Subject</th>
+          <th>Assigned To</th>
+          <th>Start date</th>
+          <th>Due date</th>
+          <th>Task content</th>
+          <th>Remove</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="task" ng-repeat="task in vm.tasks" ng-class="{'active': task.active === true}" ng-click="task.active = !task.active">
+          <td data-ng-bind="task.title"></td>
+          <td data-ng-bind="task.assignTo"></td>
+          <td data-ng-bind="task.startDate | date:'yyyy-MM-dd'"></td>
+          <td data-ng-bind="task.dueDate | date:'yyyy-MM-dd'"></td>
+          <td width="40%" data-ng-bind="task.content | limitTo:50"></td>
+          <td>
+            <span>
+              <a class="btn btn-primary" ng-init="task._id" ui-sref="tasks.view({ taskId: task._id })" ng-show="task.active">View</a>
+              
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  <div class="alert alert-warning text-center" data-ng-if="vm.tasks.$resolved && !vm.tasks.length">
+    No Tasks yet, why don't you <a data-ui-sref="tasks.create">create one</a>?
+  </div>
+</section>

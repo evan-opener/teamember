@@ -1,16 +1,15 @@
-'use strict';
-
 (function () {
-  // Tasks Controller Spec
+  'use strict';
+
   describe('Tasks Controller Tests', function () {
     // Initialize global variables
     var TasksController,
       $scope,
       $httpBackend,
-      $stateParams,
-      $location,
-      Tasks,
-      fakeTask;
+      $state,
+      Authentication,
+      TasksService,
+      mockTask;
 
     // The $resource service augments the response object with methods for updating and deleting the resource.
     // If we were to use the standard toEqual matcher, our tests would fail because the test values would not match
@@ -37,83 +36,135 @@
     // The injector ignores leading and trailing underscores here (i.e. _$httpBackend_).
     // This allows us to inject a service but then attach it to a variable
     // with the same name as the service.
-    beforeEach(inject(function ($controller, $rootScope, _$location_, _$stateParams_, _$httpBackend_, _Tasks_) {
+    beforeEach(inject(function ($controller, $rootScope, _$state_, _$httpBackend_, _Authentication_, _TasksService_) {
       // Set a new global scope
       $scope = $rootScope.$new();
-      Tasks = _Tasks_;
-      
-      fakeTask = new Tasks({
-        _id: '012345abcdef',
-        title: 'Task title',
-        content: 'Task content'
-      });
 
       // Point global variables to injected services
-      $stateParams = _$stateParams_;
       $httpBackend = _$httpBackend_;
-      $location = _$location_;
+      $state = _$state_;
+      Authentication = _Authentication_;
+      TasksService = _TasksService_;
+
+      // create mock Task
+      mockTask = new TasksService({
+        _id: '525a8422f6d0f87f0e407a33',
+        name: 'Task Name'
+      });
+
+      // Mock logged in user
+      Authentication.user = {
+        roles: ['user']
+      };
 
       // Initialize the Tasks controller.
-      TasksController = $controller('TasksController', {
-        $scope: $scope
+      TasksController = $controller('TasksController as vm', {
+        $scope: $scope,
+        taskResolve: {}
       });
+
+      //Spy on state go
+      spyOn($state, 'go');
     }));
 
-    describe('$scope.find()', function () {
-      var sampleTask;
+    describe('vm.save() as create', function () {
+      var sampleTaskPostData;
+
       beforeEach(function () {
-        sampleTask = [fakeTask];
+        // Create a sample Task object
+        sampleTaskPostData = new TasksService({
+          name: 'Task Name'
+        });
+
+        $scope.vm.task = sampleTaskPostData;
       });
-      
-      it('should return an array with atleast on task', inject(function (){
-        $httpBackend.expectGET('/api/tasks').response(sampleTask);
-        
-        $scope.find();
+
+      it('should send a POST request with the form input values and then locate to new object URL', inject(function (TasksService) {
+        // Set POST response
+        $httpBackend.expectPOST('api/tasks', sampleTaskPostData).respond(mockTask);
+
+        // Run controller functionality
+        $scope.vm.save(true);
         $httpBackend.flush();
-        
-        expect($scope.tasks).toEqualData(sampleTask);
+
+        // Test URL redirection after the Task was created
+        expect($state.go).toHaveBeenCalledWith('tasks.view', {
+          taskId: mockTask._id
+        });
+      }));
+
+      it('should set $scope.vm.error if error', function () {
+        var errorMessage = 'this is an error message';
+        $httpBackend.expectPOST('api/tasks', sampleTaskPostData).respond(400, {
+          message: errorMessage
+        });
+
+        $scope.vm.save(true);
+        $httpBackend.flush();
+
+        expect($scope.vm.error).toBe(errorMessage);
+      });
+    });
+
+    describe('vm.save() as update', function () {
+      beforeEach(function () {
+        // Mock Task in $scope
+        $scope.vm.task = mockTask;
+      });
+
+      it('should update a valid Task', inject(function (TasksService) {
+        // Set PUT response
+        $httpBackend.expectPUT(/api\/tasks\/([0-9a-fA-F]{24})$/).respond();
+
+        // Run controller functionality
+        $scope.vm.save(true);
+        $httpBackend.flush();
+
+        // Test URL location to new object
+        expect($state.go).toHaveBeenCalledWith('tasks.view', {
+          taskId: mockTask._id
+        });
+      }));
+
+      it('should set $scope.vm.error if error', inject(function (TasksService) {
+        var errorMessage = 'error';
+        $httpBackend.expectPUT(/api\/tasks\/([0-9a-fA-F]{24})$/).respond(400, {
+          message: errorMessage
+        });
+
+        $scope.vm.save(true);
+        $httpBackend.flush();
+
+        expect($scope.vm.error).toBe(errorMessage);
       }));
     });
-    
-    describe('$scope.create()', function () {
-      var sampleTaskData;
+
+    describe('vm.remove()', function () {
       beforeEach(function () {
-        sampleTaskData = {
-          title: fakeTask.title,
-          content: fakeTask.content
-        };
-        
-        $scope.title = fakeTask.title;
-        $scope.content = fakeTask.content;
-        
-        spyOn($location, 'path');
+        //Setup Tasks
+        $scope.vm.task = mockTask;
       });
-      
-      it('should send a POST request, empty the from fields, and redirect to /tasks', inject(function () {
-        $httpBackend.expectPOST('/api/tasks', sampleTaskData).response(fakeTask);
-        
-        $scope.create(true);
-        
+
+      it('should delete the Task and redirect to Tasks', function () {
+        //Return true on confirm message
+        spyOn(window, 'confirm').and.returnValue(true);
+
+        $httpBackend.expectDELETE(/api\/tasks\/([0-9a-fA-F]{24})$/).respond(204);
+
+        $scope.vm.remove();
         $httpBackend.flush();
-        
-        expect($scope.title).toBe('');
-        expect($scope.content).toBe('');
-        
-        expect($location.path.call.mostRecent().args[0]).toBe('/tasks');
-      }));
-    });
-    
-    describe('$scope.delete()', function () {
-      it('should send DELETE request and the posts array should be empty', inject(function () {
-        $scope.tasks = [fakeTask];
-        $httpBackend.expectDELETE('/api\/tasks\/([0-9a-f]{12}$/').respond(204);
-        
-        $scope.delete(fakeTask);
-        $httpBackend.flush();
-        
-        expect($scope.posts.length).toBe(0);
-        
-      }));
+
+        expect($state.go).toHaveBeenCalledWith('tasks.list');
+      });
+
+      it('should should not delete the Task and not redirect', function () {
+        //Return false on confirm message
+        spyOn(window, 'confirm').and.returnValue(false);
+
+        $scope.vm.remove();
+
+        expect($state.go).not.toHaveBeenCalled();
+      });
     });
   });
-}());
+})();

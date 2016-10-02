@@ -5,24 +5,24 @@
  */
 var path = require('path'),
   mongoose = require('mongoose'),
-  Task = mongoose.model('Tasks'),
+  Task = mongoose.model('Task'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   _ = require('lodash');
 
 /**
  * Create a Task
  */
-exports.create = function (req, res) {
+exports.create = function(req, res) {
   var task = new Task(req.body);
-  task.author = req.user;
-  
-  task.save(function (err) {
-    if(err){
+  task.user = req.user;
+
+  task.save(function(err) {
+    if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
       });
-    }else{
-      res.json(task);
+    } else {
+      res.jsonp(task);
     }
   });
 };
@@ -30,71 +30,88 @@ exports.create = function (req, res) {
 /**
  * Show the current Task
  */
-exports.read = function (req, res) {
+exports.read = function(req, res) {
+  // convert mongoose document to JSON
+  var task = req.task ? req.task.toJSON() : {};
 
+  // Add a custom field to the Article, for determining if the current User is the "owner".
+  // NOTE: This field is NOT persisted to the database, since it doesn't exist in the Article model.
+  task.isCurrentUserOwner = req.user && task.user && task.user._id.toString() === req.user._id.toString() ? true : false;
+
+  res.jsonp(task);
 };
 
 /**
  * Update a Task
  */
-exports.update = function (req, res) {
+exports.update = function(req, res) {
+  var task = req.task ;
 
+  task = _.extend(task , req.body);
+
+  task.save(function(err) {
+    if (err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      res.jsonp(task);
+    }
+  });
 };
 
 /**
  * Delete an Task
  */
-exports.delete = function (req, res) {
-  var task = req.task;
-  
-  Task.remove({
-    _id: req.params.taskId
-  }, function (err){
-    if(err) {
+exports.delete = function(req, res) {
+  var task = req.task ;
+
+  task.remove(function(err) {
+    if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
       });
-    }else{
-      res.json(task);
+    } else {
+      res.jsonp(task);
     }
   });
-
 };
 
 /**
  * List of Tasks
  */
-exports.list = function (req, res) {
-  Task.find().populate('author', 'displayName').exec(function (err, tasks){
-    if(err) {
+exports.list = function(req, res) { 
+  Task.find().sort('-created').populate('user', 'displayName').exec(function(err, tasks) {
+    if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
       });
-    }else{
-      res.json(tasks);
+    } else {
+      res.jsonp(tasks);
     }
   });
 };
 
-/*
-  Task middleware
-*/
-exports.taskByID = function (req, res, next, id) {
+/**
+ * Task middleware
+ */
+exports.taskByID = function(req, res, next, id) {
+
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).send({
-      message: 'Task ID is invalid'
+      message: 'Task is invalid'
     });
   }
-  
-  Task.findById(id).populate('author', 'displayName').exec(function (err, tasks) {
+
+  Task.findById(id).populate('user', 'displayName').exec(function (err, task) {
     if (err) {
       return next(err);
-    } else if (!tasks) {
-      return res.status(400).send({
-        message: 'No task with that identifier has been found'
+    } else if (!task) {
+      return res.status(404).send({
+        message: 'No Task with that identifier has been found'
       });
     }
-    req.tasks = tasks;
+    req.task = task;
     next();
   });
 };
