@@ -13,10 +13,14 @@
 
     vm.authentication = Authentication;
     vm.task = task;
+    vm.task.startDate = new Date(vm.task.startDate);
+    vm.task.dueDate = new Date(vm.task.dueDate);
     vm.error = null;
     vm.form = {};
     vm.remove = remove;
     vm.save = save;
+    
+    vm.dateType = "date";
 
     // Remove existing Task
     function remove() {
@@ -34,8 +38,12 @@
 
       // TODO: move create/update logic to service
       if (vm.task._id) {
+        vm.task.startDate = new Date(vm.task.startDate);
+        vm.task.dueDate = new Date(vm.task.dueDate);
         vm.task.$update(successCallback, errorCallback);
       } else {
+        vm.task.startDate = new Date(vm.task.startDate);
+        vm.task.dueDate = new Date(vm.task.dueDate);
         vm.task.$save(successCallback, errorCallback);
       }
 
