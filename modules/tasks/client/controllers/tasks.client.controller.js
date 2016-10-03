@@ -48,9 +48,7 @@
       }
 
       function successCallback(res) {
-        $state.go('tasks.view', {
-          taskId: res._id
-        });
+        $state.go('tasks.list');
       }
 
       function errorCallback(res) {

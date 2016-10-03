@@ -14,7 +14,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr class="task" ng-repeat="task in vm.tasks" ng-class="{'active': task.active === true}" ng-click="task.active = !task.active">
+        <tr class="task" ng-repeat="task in vm.tasks" ng-class="task.active" ng-click="task.active = !task.active">
           <td data-ng-bind="task.title"></td>
           <td data-ng-bind="task.assignTo"></td>
           <td data-ng-bind="task.startDate | date:'yyyy-MM-dd'"></td>
@@ -22,7 +22,7 @@
           <td width="40%" data-ng-bind="task.content | limitTo:50"></td>
           <td>
             <span>
-              <a class="btn btn-primary" ng-init="task._id" ui-sref="tasks.view({ taskId: task._id })" ng-show="task.active">View</a>
+              <a class="btn btn-primary" ng-init="task._id" ui-sref="tasks.edit({ taskId: task._id })">View</a>
               
             </span>
           </td>
