@@ -10,7 +10,7 @@
           <th>Start date</th>
           <th>Due date</th>
           <th>Task content</th>
-          <th>Remove</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>
@@ -22,8 +22,9 @@
           <td width="40%" data-ng-bind="task.content | limitTo:50"></td>
           <td>
             <span>
-              <a class="btn btn-primary" ng-init="task._id" ui-sref="tasks.edit({ taskId: task._id })">View</a>
-              
+              <a class="btn btn-primary" ng-init="task._id" ui-sref="tasks.view({ taskId: task._id })">
+                <i class="glyphicon glyphicon-arrow-right"></i>
+              </a>
             </span>
           </td>
         </tr>
