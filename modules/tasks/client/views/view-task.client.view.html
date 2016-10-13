@@ -1,6 +1,30 @@
 <section>
   <div class="page-header">
+    <small>
+      <em class="text-muted pull-right">
+        Created on
+        <span data-ng-bind="vm.task.createDate | date:'mediumDate'"></span>
+        by
+        <span data-ng-if="vm.task.user"
+          data-ng-bind="vm.task.user.displayName"></span>
+        <span data-ng-if="!vm.task.user">Unknow User</span>
+      </em>
+	  </small>
     <h1 data-ng-bind="vm.task.title"></h1>
+  </div>
+  
+  <div>
+    <h3>
+      <strong>Scheduled</strong>
+      <small>from</small> {{vm.task.startDate | date:'yyyy-MM-dd' }} <small>to</small> {{vm.task.dueDate | date:'yyyy-MM-dd' }}
+    </h3>
+    <h4>
+      <strong>Assign To</strong>
+      {{vm.task.assignTo}}
+    </h4>
+  </div>
+  <div class="well">
+  <p class="task" data-ng-bind="vm.task.content"></p>
   </div>
   <div class="pull-right">
     <a class="btn btn-primary"
@@ -11,15 +35,4 @@
       <i class="glyphicon glyphicon-trash"></i>
     </a>
   </div>
-  <small>
-    <em class="text-muted">
-      Posted on
-      <span data-ng-bind="vm.task.created | date:'mediumDate'"></span>
-      by
-      <span data-ng-if="vm.task.user"
-            data-ng-bind="vm.task.user.displayName"></span>
-      <span data-ng-if="!vm.task.user">Unknow User</span>
-    </em>
-  </small>
-  <p class="lead" data-ng-bind="vm.task.content"></p>
 </section>

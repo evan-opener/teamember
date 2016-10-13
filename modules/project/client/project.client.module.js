@@ -1,5 +1,3 @@
-(function (app) {
-  'use strict';
+'use strict';
 
-  app.registerModule('project');
-})(ApplicationConfiguration);
+ApplicationConfiguration.registerModule('project', ['tasks']);

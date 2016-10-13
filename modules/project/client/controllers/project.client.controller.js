@@ -5,10 +5,12 @@
     .module('project')
     .controller('ProjectController', ProjectController);
 
-  ProjectController.$inject = ['$scope'];
+  ProjectController.$inject = ['$scope', 'TasksService'];
 
-  function ProjectController($scope) {
+  function ProjectController($scope, TasksService) {
     var vm = this;
+    vm.tasks = TasksService.query();
+    vm.taskQty = vm.tasks.length;
 
     // Project controller logic
     // dummy projects
