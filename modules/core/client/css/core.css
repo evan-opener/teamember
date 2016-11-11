@@ -82,29 +82,29 @@ a:hover .header-profile-image {
   width: 64
 }
 
-#banner-title {
+.banner-title {
   font-size: 24px;
 }
 
-#banner-text {
+.banner-text {
   font-size: 18px;
   padding-bottom: 10px;
 }
 
-#tryitnow {
-  background-color: #454444;
-  border: 1px solid white;
+.tryitnow {
+  border: 2px solid white;
   border-radius: 6px;
   font-size: 16px;
-  color: white
+  color: white;
+  opacity: 1;
 }
 
-#order {
+.order {
   font-style: oblique;
   color: #07b0da;
 }
 
-#text-title {
+.text-title {
   color: #07b0da;
   text-align: center;
   font-size: 2.4em;
