@@ -6,11 +6,11 @@
     .module('tasks')
     .controller('TasksController', TasksController);
 
-  TasksController.$inject = ['$scope', '$state', 'Authentication', 'taskResolve'];
+  TasksController.$inject = ['$scope', '$state', 'Admin', 'Authentication', 'taskResolve'];
 
-  function TasksController ($scope, $state, Authentication, task) {
+  function TasksController ($scope, $state, Admin, Authentication, task) {
     var vm = this;
-
+    vm.users = Admin.query();
     vm.authentication = Authentication;
     vm.task = task;
     vm.task.startDate = new Date(vm.task.startDate);
@@ -19,7 +19,7 @@
     vm.form = {};
     vm.remove = remove;
     vm.save = save;
-    
+
     vm.dateType = 'date';
 
     // Remove existing Task

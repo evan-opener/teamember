@@ -13,7 +13,10 @@
         <div class="row">
           <div class="col-md-4">
             <label class="formlabel">Assign to</label>
-            <input class="form-control" type="text" placeholder="Assign to a person" ng-model="vm.task.assignTo" />
+<!--    Use select to replace the text input    -->
+            <select class="form-control" ng-model="vm.task.assignTo">
+              <option ng-repeat="user in vm.users" ng-bind="user.displayName">{{ user.displayName }}</option>
+            </select>
           </div>
   <!--
           <div class="col-md-3">
