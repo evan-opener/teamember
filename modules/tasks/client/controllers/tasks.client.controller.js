@@ -20,7 +20,7 @@
     vm.remove = remove;
     vm.save = save;
     
-    vm.dateType = "date";
+    vm.dateType = 'date';
 
     // Remove existing Task
     function remove() {
