@@ -1,5 +1,5 @@
-(function (app) {
-  'use strict';
+'use strict';
 
-  app.registerModule('tasks');
-})(ApplicationConfiguration);
+// Use Applicaion configuration module to register a new module
+ApplicationConfiguration.registerModule('tasks', ['core']);
+
