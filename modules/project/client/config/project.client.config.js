@@ -21,12 +21,12 @@
     
     Menus.addSubMenuItem('topbar', 'project', {
       title: 'Projects list',
-      state: 'project-list'
+      state: 'project.list'
     });
     
     Menus.addSubMenuItem('topbar', 'project', {
       title: 'Create New Project',
-      state: 'project-create'
+      state: 'project.create'
     });
   }
 })();
