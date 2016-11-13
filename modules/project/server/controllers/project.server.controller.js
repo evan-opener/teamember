@@ -14,7 +14,7 @@ var Project = mongoose.model('Project');
  */
 exports.create = function (req, res) {
   var project = new Project(req.body);
-  
+
   project.save(function (err){
     if(err){
       return res.status(400).send({
@@ -59,7 +59,7 @@ exports.update = function (req, res) {
  */
 exports.delete = function (req, res) {
   var project = req.project;
-  
+
   project.remove(function (err){
     if(err){
       return res.status(400).send({
@@ -82,7 +82,7 @@ exports.list = function (req, res) {
     if(err){
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
-        
+
       });
     }else{
       res.json(projects);
@@ -92,13 +92,13 @@ exports.list = function (req, res) {
 };
 
 //Project middleware
-exports.projectById = function (req, res, next, id) {
+exports.projectByID = function (req, res, next, id) {
   if (!mongoose.Types.ObjectId.isValide(id)) {
     return res.status(400).send({
       message: 'Project ID is invalid'
     });
   }
-  
+
   Project.findById(id).populate('projectName', 'projectCode').exec(function (err, project) {
     if (err) {
       return next(err);
