@@ -23,7 +23,7 @@
       .state('project.list', {
         url: '',
         templateUrl: 'modules/project/client/views/project.client.view.html',
-        controller: 'ProjectController',
+        controller: 'ProjectListController',
         controllerAs: 'vm',
         data: {
           pageTitle: 'Projects List'
@@ -32,19 +32,38 @@
       .state('project.create', {
         url: '/create',
         templateUrl: 'modules/project/client/views/form-project.client.view.html',
-        controller: 'projectController',
+        controller: 'ProjectController',
         controllerAs: 'vm',
-        resovle: {
+        resolve: {
           projectResovle: newProject
         },
         data: {
           roles: ['admin'],
           pageTitle: 'Project Create'
         }
-        
+//      .state('project.view', {
+//        url: '/:projectId',
+//        templateUrl: 'modules/project/client/views/view-project.client.view.html',
+//        controller: 'ProjectController',
+//        controllerAs: 'vm',
+//        resolve: {
+//          projectResovle: getProject
+//        },
+//        data: {
+//          pageTitle: 'Project {{ projectResovle.name }}'
+//        }
+//      })
     })
     ;
   }
+
+  getProject.$inject = ['$stateParams', 'ProjectService'];
+
+  function getProject($stateParams, ProjectService) {
+    return ProjectService.get({
+      projectId: $stateParams.projectId
+    }).$promise;
+  };
 
   newProject.$inject = ['ProjectService'];
 

@@ -1,3 +1,3 @@
 'use strict';
 
-ApplicationConfiguration.registerModule('project', ['tasks']);
+ApplicationConfiguration.registerModule('project', ['core']);
