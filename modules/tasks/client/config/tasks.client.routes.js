@@ -58,7 +58,7 @@
           taskResolve: getTask
         },
         data:{
-          pageTitle: 'Task {{ articleResolve.name }}'
+          pageTitle: 'Task {{ taskResolve.name }}'
         }
       });
   }
