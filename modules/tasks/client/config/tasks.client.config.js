@@ -26,7 +26,7 @@
     Menus.addSubMenuItem('topbar', 'tasks', {
       title: 'Create Task',
       state: 'tasks.create',
-      roles: ['user']
+      roles: ['admin', 'user']
     });
   }
 })();
