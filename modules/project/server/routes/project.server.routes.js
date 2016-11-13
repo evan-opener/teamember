@@ -1,20 +1,17 @@
 'use strict';
 
-var projects = require('../controllers/project.server.controller.js');
+var project = require('../controllers/project.server.controller.js');
 
 module.exports = function(app) {
   // Routing logic   
-  app.route('/api/projects')
-    .get(projects.list)
-    .post(projects.create);
+  app.route('/api/project')
+    .get(project.list)
+    .post(project.create);
   
-  // Text can't pass for .param
-  /*
-  app.route('/api/projects/:projectId')
-    .delete(projects.delete);
+  app.route('/api/project/:projectId')
+    .get(project.read)
+    .put(project.update)
+    .delete(project.delete);
   
-  app.param('project.id', projects.projectByID);
-  
-  */
-
+  app.param('projectId', project.projectByID);
 };
