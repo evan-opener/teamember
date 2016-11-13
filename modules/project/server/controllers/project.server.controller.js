@@ -30,14 +30,28 @@ exports.create = function (req, res) {
  * Show the current Project
  */
 exports.read = function (req, res) {
+  var project = req.project ? req.project.toJSON() : {};
 
+  res.jsonp(project);
 };
 
 /**
  * Update a Project
  */
 exports.update = function (req, res) {
+  var project = req.project;
 
+  project = _.extend(project, req.body);
+
+  project.save(function(err) {
+    if (err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      res.jsonp(project);
+    }
+  });
 };
 
 /**
@@ -52,7 +66,7 @@ exports.delete = function (req, res) {
         message: errorHandler.getErrorMessage(err)
       });
     } else {
-      res.json('deleted');
+      res.json(project);
     }
   }
   );
