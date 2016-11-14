@@ -3,7 +3,7 @@
     <h1>Projects</h1>
   </div>
   <div class="list-group">
-    <a ng-repeat="project in vm.projects" class="list-group-item">
+    <a ng-repeat="project in vm.projects" ui-sref="project.view({ projectId: project._id })" class="list-group-item">
       <div class="page-header">
         <h3 ng-bind="project.projectName">
           <small ng-bind="project.projectCode"></small>
