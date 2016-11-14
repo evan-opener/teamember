@@ -30,10 +30,10 @@
       if (!isValid) {
         $scope.$broadcast('show-error-check-validity', 'vm.form.projectForm');
         return false;
-      };
+      }
 
       if (vm.project._id) {
-        vm.project.$update(successCallback, errorCallback);
+        vm.project.$update(sucessCallback, errorCallback);
       } else {
         vm.project.$save(sucessCallback, errorCallback);
       }

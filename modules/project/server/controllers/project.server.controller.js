@@ -14,6 +14,9 @@ var Project = mongoose.model('Project');
  */
 exports.create = function (req, res) {
   var project = new Project(req.body);
+  // Debug
+  console.log("Now the project is " + project);
+  console.log("PM is " + project.pm);
 
   project.save(function (err){
     if(err){
@@ -21,7 +24,7 @@ exports.create = function (req, res) {
         message: errorHandler.getErrorMessage(err)
       });
     } else {
-      res.json(project);
+      res.jsonp(project);
     }
   });
 };

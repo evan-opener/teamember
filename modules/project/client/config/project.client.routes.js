@@ -53,7 +53,7 @@
 //          pageTitle: 'Project {{ projectResovle.name }}'
 //        }
 //      })
-    })
+      })
     ;
   }
 
@@ -63,7 +63,7 @@
     return ProjectService.get({
       projectId: $stateParams.projectId
     }).$promise;
-  };
+  }
 
   newProject.$inject = ['ProjectService'];
 
