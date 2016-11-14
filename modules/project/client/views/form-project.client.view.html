@@ -32,8 +32,10 @@
             <input class="form-control" type="text" ng-model="vm.project.description" placeholder="Input your description for the project" />
           </div>
         </div>
-        <div class="padding-top">
-          <button type="submit" class="btn btn-default">{{vm.project._id ? 'Update' : 'Create'}}</button>
+        <div class="row padding-top">
+          <button type="submit" class="btn btn-primary">Save</button>
+          <a class="btn btn-default" ui-sref="project.list">Cancel</a>
+          <a class="btn btn-danger" ng-show="vm.project._id" data-ng-click="vm.remove()">Delete</a>
         </div>
         <div ng-show="error" class="text-danger">
           <strong ng-bind="vm.error"></strong>
