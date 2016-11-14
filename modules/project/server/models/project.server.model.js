@@ -32,7 +32,7 @@ var ProjectSchema = new Schema({
     trim: true
   },
   pm: {
-    type: ObjectId,
+    type: Schema.ObjectId,
     ref: 'User'
   },
   //projectStage: [],

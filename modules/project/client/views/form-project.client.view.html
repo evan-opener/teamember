@@ -22,7 +22,7 @@
           <div class="col-md-4">
             <label class="formlabel">Project Manager</label>
             <select class="form-control" ng-model="vm.project.pm">
-              <option ng-repeat="user in vm.users" ng-bind="user">{{ user.displayName }}</option>
+              <option ng-repeat="user in vm.users" ng-bind="user.displayName">{{ user }}</option>
             </select>
           </div>
         </div>
