@@ -96,13 +96,13 @@ exports.list = function (req, res) {
 
 //Project middleware
 exports.projectByID = function (req, res, next, id) {
-  if (!mongoose.Types.ObjectId.isValide(id)) {
+  if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).send({
       message: 'Project ID is invalid'
     });
   }
 
-  Project.findById(id).populate('projectName', 'projectCode').exec(function (err, project) {
+  Project.findById(id).exec(function (err, project) {
     if (err) {
       return next(err);
     } else if (!project) {
