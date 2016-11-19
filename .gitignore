@@ -21,6 +21,8 @@ coverage/
 public/dist/
 uploads
 modules/users/client/img/profile/uploads
+modules/articles/
+modules/chat/
 config/env/local.js
 *.pem
 
