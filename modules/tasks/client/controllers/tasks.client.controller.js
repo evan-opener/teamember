@@ -6,13 +6,14 @@
     .module('tasks')
     .controller('TasksController', TasksController);
 
-  TasksController.$inject = ['$scope', '$state', 'Admin', 'Authentication', 'taskResolve'];
+  TasksController.$inject = ['$scope', '$state', 'Admin', 'Authentication', 'taskResolve', 'ProjectService'];
 
-  function TasksController ($scope, $state, Admin, Authentication, task) {
+  function TasksController ($scope, $state, Admin, Authentication, task, ProjectService) {
     var vm = this;
     vm.users = Admin.query();
     vm.authentication = Authentication;
     vm.task = task;
+    vm.projects = ProjectService.query();
     vm.task.startDate = new Date(vm.task.startDate);
     vm.task.dueDate = new Date(vm.task.dueDate);
     vm.error = null;

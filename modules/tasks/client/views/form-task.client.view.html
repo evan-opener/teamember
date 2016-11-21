@@ -5,11 +5,22 @@
   <div class="col-md-12">
     <form class="form-group" name="vm.form.taskForm" class="form-horizontal" ng-submit="vm.save(vm.form.taskForm.$valid)" novalidate>
       <fieldset>
-        <label class="formlabel">Subject</label>
-        <input width="100%" type="text" class="form-control" placeholder="Enter Subject" ng-model="vm.task.title" required />
-        <div ng-messages="vm.form.taskForm.name.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Task tile is required.</p>
+        <div class="row">
+          <div class="col-md-4">
+            <label class="formlabel">Subject</label>
+            <input width="100%" type="text" class="form-control" placeholder="Enter Subject" ng-model="vm.task.title" required />
+            <div ng-messages="vm.form.taskForm.name.$error" role="alert">
+                <p class="help-block error-text" ng-message="required">Task tile is required.</p>
+            </div>
           </div>
+          <div class="col-md-4">
+            <label class="formlabel">Belong to project</label>
+            <select class="form-control" ng-model="vm.task.project">
+              <option ng-repeat="project in vm.projects" ng-bind="project.projectName">
+              {{project.projectName}}</option>
+            </select>
+          </div>
+        </div>
         <div class="row">
           <div class="col-md-4">
             <label class="formlabel">Assign to</label>

@@ -44,6 +44,10 @@ var TaskSchema = new Schema({
   dueDate: {
     type: Date,
     require: 'Please give a due date!'
+  },
+  project:{
+    type: Schema.ObjectId,
+    ref: 'Project'
   }
   /*finish: {
     type: Date,
