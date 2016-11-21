@@ -40,3 +40,7 @@ a.list-group-item {
 h3>span {
   font-size: 18px;
 }
+
+textarea {
+  resize: none;
+}
