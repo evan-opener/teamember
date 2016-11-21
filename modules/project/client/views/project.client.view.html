@@ -6,10 +6,10 @@
     <a ng-repeat="project in vm.projects" ui-sref="project.view({ projectId: project._id })" class="list-group-item">
       <div class="page-header">
         <h3>{{project.projectName}}
-          <small class="pull-right">{{project.projectCode}}</small>
+          <span class="pull-right"><p>{{project.projectCode}}</p></span>
         </h3>
-
       </div>
+      <h5>Managed by : {{project.pm}}</h5>
       <p ng-bind="project.description"></p>
     </a>
   </div>

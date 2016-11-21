@@ -32,10 +32,11 @@
 
 a.list-group-item {
   display: block;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  border-bottom-right-radius: 14px;
-  border-top-left-radius: 14px;
+  margin-bottom: 5px;
   background-color: rgba(3, 40, 111, 0.84);
-  color: #ecebeb;
+  color: white;
+}
+
+h3>span {
+  font-size: 18px;
 }
