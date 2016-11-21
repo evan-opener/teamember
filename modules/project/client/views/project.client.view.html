@@ -5,12 +5,12 @@
   <div class="list-group">
     <a ng-repeat="project in vm.projects" ui-sref="project.view({ projectId: project._id })" class="list-group-item">
       <div class="page-header">
-        <h3 ng-bind="project.projectName">
-          <small ng-bind="project.projectCode"></small>
+        <h3>{{project.projectName}}
+          <small class="pull-right">{{project.projectCode}}</small>
         </h3>
+
       </div>
       <p ng-bind="project.description"></p>
-      <p>Tasks <span class="badge" ng-bind="project.tasks"></span></p>
     </a>
   </div>
 </section>
