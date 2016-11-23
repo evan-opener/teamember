@@ -34,8 +34,10 @@ var ProjectSchema = new Schema({
   pm: {
     type: String
   },
-
-//  tasks: [],
+  tasks: [{
+    type: Schema.ObjectId,
+    ref: 'Task'
+  }],
 });
 
 mongoose.model('Project', ProjectSchema);

@@ -15,7 +15,7 @@ var path = require('path'),
 exports.create = function(req, res) {
   var task = new Task(req.body);
   task.user = req.user;
-
+  var project = task.project;
   task.save(function(err) {
     if (err) {
       return res.status(400).send({
@@ -23,8 +23,18 @@ exports.create = function(req, res) {
       });
     } else {
       res.jsonp(task);
+
     }
   });
+  Task.findById(task._id).populate('project').exec(function (err, task) {
+    if (err) {
+      return err;
+    }
+    this.task.project.tasks.push(this.task);
+    // TODO: how to save the task in project?
+    this.task = task;
+  });
+
 };
 
 /**
@@ -55,6 +65,7 @@ exports.update = function(req, res) {
         message: errorHandler.getErrorMessage(err)
       });
     } else {
+      task.project.tasks.push(task);
       res.jsonp(task);
     }
   });
@@ -81,7 +92,7 @@ exports.delete = function(req, res) {
  * List of Tasks
  */
 exports.list = function(req, res) { 
-  Task.find().sort('-created').populate('user', 'displayName').exec(function(err, tasks) {
+  Task.find().sort('-created').populate('user project').exec(function(err, tasks) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
