@@ -47,7 +47,8 @@
         vm.task.dueDate = new Date(vm.task.dueDate);
         vm.task.$save(successCallback, errorCallback);
       }
-
+      //debug
+      console.log(vm.task);
       function successCallback(res) {
         $state.go('tasks.list');
       }

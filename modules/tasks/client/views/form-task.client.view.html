@@ -16,7 +16,7 @@
           <div class="col-md-4">
             <label class="formlabel">Belong to project</label>
             <select class="form-control" ng-model="vm.task.project">
-              <option ng-repeat="project in vm.projects" ng-bind="project.projectName">
+              <option ng-repeat="project in vm.projects" value="{{project._id}}">
               {{project.projectName}}</option>
             </select>
           </div>
