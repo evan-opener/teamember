@@ -103,7 +103,7 @@ exports.taskByID = function(req, res, next, id) {
     });
   }
 
-  Task.findById(id).populate('user', 'displayName').exec(function (err, task) {
+  Task.findById(id).populate('user project').exec(function (err, task) {
     if (err) {
       return next(err);
     } else if (!task) {
