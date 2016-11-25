@@ -6,6 +6,7 @@
 var path = require('path'),
   mongoose = require('mongoose'),
   Task = mongoose.model('Task'),
+  Project = mongoose.model('Project'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   _ = require('lodash');
 
@@ -15,28 +16,27 @@ var path = require('path'),
 exports.create = function(req, res) {
   var task = new Task(req.body);
   task.user = req.user;
-  var project = task.project;
+  var projectId = task.project;
+  console.log(projectId);
   task.save(function(err) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
       });
     } else {
-      res.jsonp(task);
 
+      // For task create, can use push method into project tasks.
+      Project.findById(projectId).exec(function(err, project) {
+        if(project.tasks == null) {
+          project.tasks = [];
+        }
+        project.tasks.push(task);
+        project.save();
+        res.jsonp(task);
+      });
     }
   });
-  Task.findById(task._id).populate('project').exec(function (err, task) {
-    if (err) {
-      return err;
-    }
-    this.task.project.tasks.push(this.task);
-    // TODO: how to save the task in project?
-    this.task = task;
-  });
-
 };
-
 /**
  * Show the current Task
  */
@@ -46,7 +46,7 @@ exports.read = function(req, res) {
 
   // Add a custom field to the Article, for determining if the current User is the "owner".
   // NOTE: This field is NOT persisted to the database, since it doesn't exist in the Article model.
-  task.isCurrentUserOwner = req.user && task.user && task.user._id.toString() === req.user._id.toString() ? true : false;
+//  task.isCurrentUserOwner = req.user && task.user && task.user._id.toString() === req.user._id.toString() ? true : false;
 
   res.jsonp(task);
 };
@@ -55,7 +55,8 @@ exports.read = function(req, res) {
  * Update a Task
  */
 exports.update = function(req, res) {
-  var task = req.task ;
+  var task = req.task;
+  var projectId = task.project._id;
 
   task = _.extend(task , req.body);
 
@@ -65,8 +66,13 @@ exports.update = function(req, res) {
         message: errorHandler.getErrorMessage(err)
       });
     } else {
-      task.project.tasks.push(task);
+      // Here to push to project will cause the same task save in project more times
       res.jsonp(task);
+      Project.findById(projectId).exec(function(err, project) {
+
+        project.tasks.push(task);
+        project.save()
+      });
     }
   });
 };
@@ -91,7 +97,7 @@ exports.delete = function(req, res) {
 /**
  * List of Tasks
  */
-exports.list = function(req, res) { 
+exports.list = function(req, res) {
   Task.find().sort('-created').populate('user project').exec(function(err, tasks) {
     if (err) {
       return res.status(400).send({

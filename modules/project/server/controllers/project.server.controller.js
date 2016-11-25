@@ -17,7 +17,7 @@ exports.create = function (req, res) {
   // Debug
   console.log("Now the project is " + project);
   console.log("PM is " + project.pm);
-
+  project.tasks = [];
   project.save(function (err){
     if(err){
       return res.status(400).send({
@@ -43,7 +43,9 @@ exports.read = function (req, res) {
  */
 exports.update = function (req, res) {
   var project = req.project;
-
+  if(project.tasks == null) {
+          project.tasks = [];
+  }
   project = _.extend(project, req.body);
 
   project.save(function(err) {
