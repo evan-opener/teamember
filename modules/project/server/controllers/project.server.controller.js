@@ -104,7 +104,9 @@ exports.projectByID = function (req, res, next, id) {
     });
   }
 
-  Project.findById(id).exec(function (err, project) {
+  Project.findById(id)
+    .populate('tasks')
+    .exec(function (err, project) {
     if (err) {
       return next(err);
     } else if (!project) {

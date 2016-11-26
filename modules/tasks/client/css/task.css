@@ -64,3 +64,8 @@ textarea {
   padding: 5px;
   margin: 1px 20px 1px 20px;
 }
+
+.right {
+  float: right;
+  display: block;
+  }
