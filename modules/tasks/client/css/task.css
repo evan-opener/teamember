@@ -30,11 +30,26 @@
   margin-right: 15px;
 }
 
-a.list-group-item {
+div.list-group > a {
   display: block;
   margin-bottom: 5px;
   background-color: rgba(3, 40, 111, 0.84);
   color: white;
+  border-radius: 15px;
+}
+
+.list-group-item:first-child {
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+.list-group-item:last-child {
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
+
+div.page-header h1 {
+  color: rgba(3, 40, 111, 0.84);
 }
 
 h3>span {
