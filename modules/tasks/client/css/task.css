@@ -59,3 +59,8 @@ h3>span {
 textarea {
   resize: none;
 }
+
+.well {
+  padding: 5px;
+  margin: 1px 20px 1px 20px;
+}

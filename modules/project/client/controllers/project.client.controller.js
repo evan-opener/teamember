@@ -12,6 +12,7 @@
 
     vm.users = Admin.query();
     vm.project = project;
+    vm.tasks = vm.project.tasks;
     vm.authentication = Authentication;
     vm.error = null;
     vm.form = {};

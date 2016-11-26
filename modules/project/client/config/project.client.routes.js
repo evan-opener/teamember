@@ -43,7 +43,7 @@
         }
       })
       .state('project.edit', {
-        url: '/:project/edit',
+        url: '/:projectId/edit',
         templateUrl: 'modules/project/client/views/form-project.client.view.html',
         controller: 'ProjectController',
         controllerAs: 'vm',
@@ -51,13 +51,13 @@
           projectResovle: getProject
         },
         data: {
-          roles: ['user', 'admin'],
+          roles: ['admin'],
           pageTitle: 'Edit Project {{ projectResolve.name }} information'
         }
       })
       .state('project.view', {
         url: '/:projectId',
-        templateUrl: 'modules/project/client/views/form-project.client.view.html',
+        templateUrl: 'modules/project/client/views/view-project.client.view.html',
         controller: 'ProjectController',
         controllerAs: 'vm',
         resolve: {
