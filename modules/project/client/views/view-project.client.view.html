@@ -15,22 +15,34 @@
   <div>
     <h3 class="page-header">Tasks</h3>
     <div class="container">
-      <div ng-repeat="task in vm.tasks">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            {{task.title}}
-          </div>
-          <div class="panel-body">
-            <p>{{task.content}}</p>
-            <p class="right">{{task.startDate | date:'yyyy-MM-dd'}}</p>
-            <p class="right"> - </p>
-            <p class="right">{{task.dueDate | date:'yyyy-MM-dd'}}</p>
-          </div>
-          <div class="panel-footer">
-            <p> {{task.assignTo}} </p>
-          </div>
-        </div>
-      </div>
+      <table class="table table-hover">
+      <thead class="table-head">
+        <tr>
+          <th>Subject</th>
+          <th>Assigned To</th>
+          <th>Start date</th>
+          <th>Due date</th>
+          <th>Task content</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="task" ng-repeat="task in vm.tasks" ng-class="task.active" ng-click="task.active = !task.active">
+          <td data-ng-bind="task.title"></td>
+          <td data-ng-bind="task.assignTo"></td>
+          <td data-ng-bind="task.startDate | date:'yyyy-MM-dd'"></td>
+          <td data-ng-bind="task.dueDate | date:'yyyy-MM-dd'"></td>
+          <td width="40%" data-ng-bind="task.content | limitTo:50"></td>
+          <td>
+            <span>
+              <a class="btn btn-primary" ng-init="task._id" ui-sref="tasks.view({ taskId: task._id })">
+                <i class="glyphicon glyphicon-arrow-right"></i>
+              </a>
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
     </div>
   </div>
 </section>
