@@ -15,8 +15,8 @@ var Project = mongoose.model('Project');
 exports.create = function (req, res) {
   var project = new Project(req.body);
   // Debug
-  console.log("Now the project is " + project);
-  console.log("PM is " + project.pm);
+  console.log('Now the project is ' + project);
+  console.log('PM is ' + project.pm);
   project.tasks = [];
   project.save(function (err){
     if(err){
@@ -44,7 +44,7 @@ exports.read = function (req, res) {
 exports.update = function (req, res) {
   var project = req.project;
   if(project.tasks === null) {
-          project.tasks = [];
+    project.tasks = [];
   }
   project = _.extend(project, req.body);
 
@@ -107,15 +107,15 @@ exports.projectByID = function (req, res, next, id) {
   Project.findById(id)
     .populate('tasks')
     .exec(function (err, project) {
-    if (err) {
-      return next(err);
-    } else if (!project) {
-      return res.status(404).send({
-        message: 'No project with that identifier has been found'
-      });
-    }
-    req.project = project;
-    next();
-  });
+      if (err) {
+        return next(err);
+      } else if (!project) {
+        return res.status(404).send({
+          message: 'No project with that identifier has been found'
+        });
+      }
+      req.project = project;
+      next();
+    });
 };
 
