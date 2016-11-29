@@ -43,7 +43,7 @@ exports.read = function (req, res) {
  */
 exports.update = function (req, res) {
   var project = req.project;
-  if(project.tasks == null) {
+  if(project.tasks === null) {
           project.tasks = [];
   }
   project = _.extend(project, req.body);

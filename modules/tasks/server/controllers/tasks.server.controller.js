@@ -27,7 +27,7 @@ exports.create = function(req, res) {
 
       // For task create, can use push method into project tasks.
       Project.findById(projectId).exec(function(err, project) {
-        if(project.tasks == null) {
+        if(project.tasks === null) {
           project.tasks = [];
         }
         project.tasks.push(task);
@@ -71,7 +71,7 @@ exports.update = function(req, res) {
       Project.findById(projectId).exec(function(err, project) {
 
         project.tasks.push(task);
-        project.save()
+        project.save();
       });
     }
   });
