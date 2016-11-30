@@ -58,7 +58,7 @@
       .state('project.view', {
         url: '/:projectId',
         templateUrl: 'modules/project/client/views/view-project.client.view.html',
-        controller: 'viewProjectController',
+        controller: 'ProjectViewController',
         controllerAs: 'vm',
         resolve: {
           projectResovle: getProject

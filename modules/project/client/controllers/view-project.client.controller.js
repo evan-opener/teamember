@@ -1,21 +1,21 @@
-(function () {
-    'use strict';
+(function() {
+  'use strict';
 
-    angular
-        .module('project')
-        .controller('viewProjectController', viewProjectController);
+  angular
+    .module('project')
+    .controller('ProjectViewController', ProjectViewController);
 
-    /* @ngInject */
-    viewProjectController.$inject = ['$scope', '$state', 'Authentication', 'projectResovle', 'Admin'];
+  /* @ngInject */
+  ProjectViewController.$inject = ['$scope', '$state', 'Authentication', 'projectResovle', 'Admin'];
 
-  function viewProjectController($scope, $state, Authentication, project, Admin) {
+  function ProjectViewController($scope, $state, Authentication, project, Admin) {
     var vm = this;
 
     vm.project = project;
-    vm.tasks = vm.project.tasks;
+    vm.tasks = project.tasks;
     vm.authentication = Authentication;
     vm.error = null;
     vm.form = {};
 
-  };
+  }
 })();
