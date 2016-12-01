@@ -1,10 +1,11 @@
 'use strict';
 
-angular.module('core').controller('HeaderController', ['$scope', '$state', 'Authentication', 'Menus',
-  function ($scope, $state, Authentication, Menus) {
+angular.module('core').controller('HeaderController', ['$scope', '$state', 'Authentication', 'Menus', '$rootScope',
+  function ($scope, $state, Authentication, Menus, $rootScope) {
     // Expose view variables
     $scope.$state = $state;
     $scope.authentication = Authentication;
+
 
     // Get the topbar menu
     $scope.menu = Menus.getMenu('topbar');
@@ -18,6 +19,7 @@ angular.module('core').controller('HeaderController', ['$scope', '$state', 'Auth
     // Collapsing the menu after navigation
     $scope.$on('$stateChangeSuccess', function () {
       $scope.isCollapsed = false;
+      $scope.project = $rootScope.projectName;
     });
   }
 ]);

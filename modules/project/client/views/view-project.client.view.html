@@ -4,6 +4,7 @@
   </div>
   <div class="right">
     <a class="btn btn-primary" ui-sref="project.edit({ projectId: vm.project._id })">Edit</a>
+    <a class="btn btn-success" ng-click="vm.select()">Select</a>
   </div>
   <div class="container">
     <h3>Project code <span class="well">{{ vm.project.projectCode }}</span></h3>
@@ -12,6 +13,7 @@
       Project brief <span class="well">{{ vm.project.description }}</span>
     </h3>
   </div>
+<!--
   <div>
     <h3 class="page-header">Tasks in project</h3>
     <div class="container">
@@ -45,4 +47,5 @@
     </table>
     </div>
   </div>
+-->
 </section>
