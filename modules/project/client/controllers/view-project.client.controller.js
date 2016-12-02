@@ -22,6 +22,6 @@
       $rootScope.projectName = vm.project.projectName;
       console.log($rootScope.projectName);
       $location.url('/');
-    };
+    }
   }
 })();
