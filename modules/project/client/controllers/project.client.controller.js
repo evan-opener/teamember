@@ -36,6 +36,7 @@
       if (vm.project._id) {
         vm.project.$update(sucessCallback, errorCallback);
       } else {
+        vm.project.tasks = [];
         vm.project.$save(sucessCallback, errorCallback);
       }
 

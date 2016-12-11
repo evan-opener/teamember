@@ -56,7 +56,7 @@ exports.read = function(req, res) {
  */
 exports.update = function(req, res) {
   var task = req.task;
-  var projectId = task.project._id;
+  var projectId = task.project;
 
   task = _.extend(task , req.body);
 
@@ -70,7 +70,7 @@ exports.update = function(req, res) {
       res.jsonp(task);
       Project.findById(projectId).exec(function(err, project) {
 
-        project.tasks.push(task);
+        project.tasks = project.tasks.concat(task);
         project.save();
       });
     }
