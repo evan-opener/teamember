@@ -18,6 +18,7 @@
 
     vm.select = select;
 
+    // Use $rootScope to project selection
     function select() {
       $rootScope.projectName = vm.project.projectName;
       console.log($rootScope.projectName);
