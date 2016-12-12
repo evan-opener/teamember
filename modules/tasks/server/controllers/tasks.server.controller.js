@@ -70,6 +70,9 @@ exports.update = function(req, res) {
       res.jsonp(task);
       Project.findById(projectId).exec(function(err, project) {
 
+        if(project.tasks === null) {
+          project.tasks = [];
+        }
         project.tasks = project.tasks.concat(task);
         project.save();
       });

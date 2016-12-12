@@ -13,14 +13,17 @@
     vm.users = Admin.query();
     vm.authentication = Authentication;
     vm.task = task;
-    vm.projects = ProjectService.query();
+    vm.projects = [];
+    ProjectService.query(function(projects) {
+      vm.projects = projects;
+      console.log(vm.projects[0]);
+    });
     vm.task.startDate = new Date(vm.task.startDate);
     vm.task.dueDate = new Date(vm.task.dueDate);
     vm.error = null;
     vm.form = {};
     vm.remove = remove;
     vm.save = save;
-
     vm.dateType = 'date';
 
     // Remove existing Task

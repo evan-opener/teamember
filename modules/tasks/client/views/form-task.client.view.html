@@ -15,10 +15,7 @@
           </div>
           <div class="col-md-4">
             <label class="formlabel">Belong to project</label>
-            <select class="form-control" ng-model="vm.task.project">
-              <option value="General">General</option>
-              <option ng-repeat="project in vm.projects" value="{{project._id}}">
-              {{project.projectName}}</option>
+            <select class="form-control" ng-options="project as project.projectName for project in vm.projects" ng-model="vm.task.project">
             </select>
           </div>
         </div>
@@ -27,6 +24,7 @@
             <label class="formlabel">Assign to</label>
 <!--    Use select to replace the text input    -->
             <select class="form-control" ng-model="vm.task.assignTo">
+              <option ng-show="vm.task.assignTo" value="vm.task.assignTo" selected>{{vm.task.assignTo}}</option>
               <option ng-repeat="user in vm.users" value="{{user.displayName}}">{{ user.displayName }}</option>
             </select>
           </div>
