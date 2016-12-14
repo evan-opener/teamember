@@ -10,16 +10,18 @@
           <th>Start date</th>
           <th>Due date</th>
           <th>Task content</th>
+          <th>Project</th>
           <th>Action</th>
         </tr>
       </thead>
       <tbody>
-        <tr class="task" ng-repeat="task in vm.tasks" ng-class="task.active" ng-click="task.active = !task.active">
+        <tr class="task" ng-repeat="task in vm.tasks | filter:projectName" ng-class="task.active" ng-click="task.active = !task.active">
           <td data-ng-bind="task.title"></td>
           <td data-ng-bind="task.assignTo"></td>
           <td data-ng-bind="task.startDate | date:'yyyy-MM-dd'"></td>
           <td data-ng-bind="task.dueDate | date:'yyyy-MM-dd'"></td>
-          <td width="40%" data-ng-bind="task.content | limitTo:50"></td>
+          <td width="30%" data-ng-bind="task.content | limitTo:50"></td>
+          <td data-ng-bind="task.project.projectName"></td>
           <td>
             <span>
               <a class="btn btn-primary" ng-init="task._id" ui-sref="tasks.view({ taskId: task._id })">
